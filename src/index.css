@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply min-h-screen font-sans transition-colors duration-500;
+    background: #f8fafc;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(135, 206, 235, 0.4) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(176, 226, 255, 0.4) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  html.dark body {
+    background: #1e3a8a;
+  }
+
+  html.dark body::before {
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(0, 0, 128, 0.6) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(25, 25, 112, 0.6) 0%, transparent 50%);
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-light text-white hover:bg-primary-light/90 focus:ring-primary-light/50 dark:bg-primary-dark dark:hover:bg-primary-dark/90 dark:focus:ring-primary-dark/50;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary-light text-white hover:bg-secondary-light/90 focus:ring-secondary-light/50 dark:bg-secondary-dark dark:hover:bg-secondary-dark/90 dark:focus:ring-secondary-dark/50;
+  }
+  
+  .card {
+    @apply bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-xl p-6 border border-gray-200/20 dark:border-gray-700/20 transition-colors duration-500;
+  }
+  
+  .input {
+    @apply w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-light/50 dark:focus:ring-primary-dark/50 bg-white dark:bg-gray-700 text-text-light dark:text-text-dark;
+  }
+}
+
+/* Add subtle animation for background gradients */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+body {
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Network Background Animation */
+.network-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.network-background::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, #f8fafc 70%);
+  z-index: 2;
+}
+
+.dark .network-background::before {
+  background: radial-gradient(circle at center, transparent 0%, #1e3a8a 70%);
+}
+
+.node {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #1e3a8a;
+  border-radius: 50%;
+  animation: moveNode 20s infinite;
+}
+
+.dark .node {
+  background: #3b82f6;
+}
+
+.line {
+  position: absolute;
+  height: 1px;
+  background: #1e3a8a;
+  opacity: 0.2;
+  transform-origin: left center;
+}
+
+.dark .line {
+  background: #3b82f6;
+  opacity: 0.3;
+}
+
+@keyframes moveNode {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(50px, 25px);
+  }
+  50% {
+    transform: translate(0, 50px);
+  }
+  75% {
+    transform: translate(-50px, 25px);
+  }
+}
